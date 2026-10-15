@@ -1,0 +1,600 @@
+/* NDU-UPG bubbles: soft embossed bubbles that open into cards and fold back. */
+.ndu-bub {
+  --s: 44px;
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  flex: none;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: var(--color-fg);
+  background: radial-gradient(circle at 32% 26%, #4a3b2e 0%, #2c241c 58%, #201912 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38),
+    0 3px 0 #110d0a,
+    0 8px 18px rgba(0, 0, 0, 0.38);
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.18s ease,
+    background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ndu-bub svg {
+  width: 20px;
+  height: 20px;
+}
+.ndu-bub:hover {
+  transform: translateY(-1px);
+}
+.ndu-bub:active {
+  transform: translateY(2px) scale(0.92);
+  box-shadow:
+    inset 0 3px 7px rgba(0, 0, 0, 0.55),
+    0 1px 0 #110d0a;
+}
+.ndu-bub:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.ndu-bub[aria-expanded="true"],
+.ndu-bub[aria-pressed="true"] {
+  color: #1a1511;
+  background: radial-gradient(circle at 32% 26%, #f7b47a 0%, #e8843a 58%, #c4651f 100%);
+}
+.ndu-bub--sm {
+  --s: 38px;
+}
+.ndu-bub--sm svg {
+  width: 18px;
+  height: 18px;
+}
+.ndu-bub--lg {
+  --s: 56px;
+}
+.ndu-bub--lg svg {
+  width: 24px;
+  height: 24px;
+}
+.ndu-bub__label {
+  position: absolute;
+  inset: auto 0 -1px 0;
+  text-align: center;
+  font: 650 9px/1 var(--font-sans);
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+.ndu-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font: 650 10.5px/1 var(--font-sans);
+  color: #1a1511;
+  background: radial-gradient(circle at 35% 30%, #ffd2a8, #e8843a 70%);
+  box-shadow:
+    0 0 0 2px #1a1511,
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  animation: ndu-pop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ndu-badge--warn {
+  background: radial-gradient(circle at 35% 30%, #ffb3a1, #d9472b 70%);
+  color: #fff6ee;
+}
+.ndu-badge--pulse::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 2px solid #e8843a;
+  animation: ndu-ping 1.8s ease-out infinite;
+}
+
+/* Top pill */
+.ndu-top {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 520;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 999px;
+  max-width: calc(100% - 20px);
+  background: linear-gradient(180deg, rgba(52, 42, 33, 0.94), rgba(36, 29, 23, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 10px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.2s ease;
+}
+.ndu-top__brand {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1;
+  padding: 0 6px 0 8px;
+  color: var(--color-fg);
+}
+.ndu-top__hint {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 8px;
+  width: min(18rem, calc(100vw - 36px));
+  padding: 10px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--color-fg);
+  background: linear-gradient(180deg, rgba(52, 42, 33, 0.97), rgba(36, 29, 23, 0.97));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 14px 30px rgba(0, 0, 0, 0.45);
+  transform-origin: top left;
+  animation: ndu-unfold 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.ndu-top__hint::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 62px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background: rgba(52, 42, 33, 0.97);
+}
+.ndu-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 13.5rem;
+  max-width: calc(100vw - 20px);
+  padding: 8px;
+  border-radius: 22px;
+  display: grid;
+  gap: 6px;
+  background: linear-gradient(180deg, rgba(52, 42, 33, 0.97), rgba(36, 29, 23, 0.97));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 14px 30px rgba(0, 0, 0, 0.45);
+  transform-origin: top right;
+  animation: ndu-unfold 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.ndu-menu__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  width: 100%;
+  padding: 0 10px 0 4px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-align: left;
+  color: var(--color-fg);
+}
+.ndu-menu__row:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+.ndu-menu__row .ndu-bub {
+  pointer-events: none;
+}
+
+/* Tools cluster (left column) */
+.ndu-cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+.ndu-cluster__items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+.ndu-cluster__items > * {
+  animation: ndu-pop-in 0.34s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+}
+.ndu-cluster__items > *:nth-child(2) { animation-delay: 0.035s; }
+.ndu-cluster__items > *:nth-child(3) { animation-delay: 0.07s; }
+.ndu-cluster__items > *:nth-child(4) { animation-delay: 0.105s; }
+.ndu-cluster__items > *:nth-child(5) { animation-delay: 0.14s; }
+.ndu-cluster__items > *:nth-child(n + 6) { animation-delay: 0.17s; }
+.ndu-cluster__row {
+  display: flex;
+  gap: 9px;
+}
+/* Buttons that other parts of the app drop into the cluster (Scans, light-map chip, time dial…) get the bubble look. */
+.ndu-cluster__items > button:not(.ndu-bub) {
+  min-height: 38px !important;
+  padding: 0 14px !important;
+  border-radius: 999px;
+  font-size: 13px;
+  background: radial-gradient(circle at 30% 20%, #4a3b2e 0%, #2c241c 60%, #201912 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38),
+    0 3px 0 #110d0a,
+    0 8px 18px rgba(0, 0, 0, 0.38) !important;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ndu-cluster__items > button:not(.ndu-bub):active {
+  transform: translateY(2px) scale(0.95);
+}
+.ndu-cluster__items > div {
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 10px 22px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Route pill */
+.ndu-route {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.ndu-route__pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 14px 0 4px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-fg);
+  background: radial-gradient(circle at 30% 20%, #4a3b2e 0%, #2c241c 60%, #201912 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38),
+    0 3px 0 #110d0a,
+    0 8px 18px rgba(0, 0, 0, 0.38);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ndu-route__pill:active {
+  transform: translateY(2px) scale(0.95);
+}
+.ndu-ring {
+  --p: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--color-accent) calc(var(--p) * 1turn), rgba(255, 255, 255, 0.1) 0);
+}
+.ndu-ring > span {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #241c16;
+}
+.ndu-ring svg {
+  width: 16px;
+  height: 16px;
+}
+.ndu-unfold {
+  transform-origin: top right;
+  animation: ndu-unfold 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* Needs bubble + bottom sheet */
+.ndu-needs-bub {
+  pointer-events: auto;
+  margin-left: auto;
+}
+.ndu-needs-bub .ndu-ring {
+  width: 46px;
+  height: 46px;
+}
+.ndu-needs-bub .ndu-ring > span {
+  width: 36px;
+  height: 36px;
+}
+.ndu-needs-bub .ndu-ring svg {
+  width: 20px;
+  height: 20px;
+}
+.ndu-sheet {
+  position: relative;
+  pointer-events: auto;
+  width: 100%;
+  max-width: 28rem;
+  margin-left: auto;
+  transform-origin: bottom right;
+  animation: ndu-sheet-in 0.38s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.ndu-sheet > [data-ndu-overlay] {
+  max-height: min(62dvh, 34rem);
+  overflow-y: auto;
+  padding-top: 26px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 -6px 30px rgba(0, 0, 0, 0.45) !important;
+}
+.ndu-sheet__fold {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 76px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+}
+.ndu-sheet__fold::before {
+  content: "";
+  width: 40px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(246, 239, 226, 0.32);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+.ndu-sheet__close {
+  position: absolute !important;
+  z-index: 3;
+  top: -15px;
+  right: 14px;
+  --s: 34px !important;
+}
+@media (max-width: 639px) {
+  .ndu-sheet {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: auto;
+    max-width: none;
+    transform-origin: bottom right;
+  }
+}
+
+/* Walk stick: smaller embossed ring with a thumb dot */
+html[data-ndu-ui="bubbles"] .ndu-stick {
+  width: 76px !important;
+  height: 76px !important;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: radial-gradient(circle at 50% 45%, rgba(44, 36, 28, 0.55) 0%, rgba(26, 21, 17, 0.7) 70%) !important;
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+html[data-ndu-ui="bubbles"] .ndu-stick::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 32% 26%, #4a3b2e, #2c241c 60%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 3px 0 #110d0a,
+    0 4px 8px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+/* Full-map: only the top pill stays */
+html[data-ndu-clear="1"] [data-ndu-bubble-hideable] {
+  opacity: 0 !important;
+  transform: scale(0.6);
+  pointer-events: none !important;
+  transition:
+    opacity 0.25s ease,
+    transform 0.3s ease;
+}
+html[data-ndu-panning="1"] .ndu-top,
+html[data-ndu-panning="1"] [data-ndu-bubble-hideable] {
+  opacity: 0.35;
+}
+
+@keyframes ndu-pop {
+  0% { transform: scale(0.3); }
+  100% { transform: scale(1); }
+}
+@keyframes ndu-pop-in {
+  0% { opacity: 0; transform: translateY(-14px) scale(0.4); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ndu-unfold {
+  0% { opacity: 0; transform: scale(0.3); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ndu-sheet-in {
+  0% { opacity: 0; transform: translate(10%, 12%) scale(0.12); border-radius: 999px; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ndu-ping {
+  0% { opacity: 0.9; transform: scale(1); }
+  80%, 100% { opacity: 0; transform: scale(1.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ndu-bub,
+  .ndu-badge,
+  .ndu-top__hint,
+  .ndu-menu,
+  .ndu-unfold,
+  .ndu-sheet,
+  .ndu-route__pill,
+  .ndu-cluster__items > *,
+  .ndu-badge--pulse::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* NDU-UPG drag360: live compass needle + the small N bubble that faces north at the isometric tilt. */
+.ndu-cluster {
+  position: relative;
+}
+.ndu-needle {
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+.ndu-needle svg {
+  transform: rotate(-45deg); /* lucide's compass needle points NE; turn it to point up (north) */
+}
+.ndu-north {
+  position: absolute;
+  top: 2px;
+  left: 50px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font: 800 12px/1 var(--font-sans);
+  color: #1a1511;
+  background: radial-gradient(circle at 32% 26%, #f7b47a 0%, #e8843a 58%, #c4651f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+    0 2px 0 #6e3612,
+    0 5px 12px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ndu-north::before {
+  content: "";
+  position: absolute;
+  inset: -7px; /* 44px touch target */
+}
+.ndu-north:active {
+  transform: translateY(2px) scale(0.9);
+}
+.ndu-north.is-home {
+  opacity: 0.55;
+  color: var(--color-fg);
+  background: radial-gradient(circle at 32% 26%, #4a3b2e 0%, #2c241c 58%, #201912 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 0 #110d0a;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ndu-north {
+    transition: none;
+  }
+}
+
+/* NDU-UPG follow: Recenter bubble (paused follow camera) beside the compass + N. */
+.ndu-recenter {
+  position: absolute;
+  top: -2px;
+  left: 90px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #1a1511;
+  background: radial-gradient(circle at 32% 26%, #f7b47a 0%, #e8843a 58%, #c4651f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    0 3px 0 #6e3612,
+    0 8px 18px rgba(0, 0, 0, 0.38);
+  animation: ndu-recenter-in 0.34s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+.ndu-recenter::before {
+  content: "";
+  position: absolute;
+  inset: -4px; /* 48px touch target */
+}
+.ndu-recenter svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+}
+.ndu-recenter:active {
+  transform: translateY(2px) scale(0.9);
+}
+.ndu-recenter.is-on {
+  color: #f7b47a;
+  background: radial-gradient(circle at 32% 26%, #4a3b2e 0%, #2c241c 58%, #201912 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.38),
+    0 3px 0 #110d0a,
+    0 8px 18px rgba(0, 0, 0, 0.38);
+}
+.ndu-recenter__n {
+  font: 800 13px/1 var(--font-sans);
+}
+@keyframes ndu-recenter-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ndu-recenter {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Life-size camera: third person behind you, or second person looking at your face. */
+.ndu-person {
+  position: absolute;
+  top: -2px;
+  left: 136px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font: 800 11px/1 var(--font-sans);
+  color: #1a1511;
+  background: radial-gradient(circle at 32% 26%, #f7b47a 0%, #e8843a 58%, #c4651f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.3),
+    0 3px 0 #6e3612,
+    0 8px 18px rgba(0, 0, 0, 0.38);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.ndu-person::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+}
+.ndu-person:active {
+  transform: translateY(2px) scale(0.9);
+}

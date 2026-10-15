@@ -1,0 +1,7 @@
+# src/world/traffic
+
+This folder implements vehicle traffic simulation for the CityDesk world: it defines the vehicle types, dimensions, speeds, and livery colors, and provides the car-following math used to move vehicles around. A seeded `TrafficSimulator` manages a tier-capped fleet of vehicles positioned in lat/lng and steps their motion forward using the Intelligent Driver Model (IDM).
+
+- **idm.ts** — Exports the IDM car-following algorithm (Treiber, Hennecke, & Helbing, 2000): the `IdmParams` type, `DEFAULT_IDM_PARAMS`, `calculateIdmAcceleration()` which computes a vehicle's clamped acceleration from its speed and the speed/gap to a leading vehicle, and `stepVehiclePhysics()` which advances speed and distance via Euler integration.
+- **types.ts** — Defines shared traffic types and constants: `VehicleType` (`keke`, `danfo`, `bus`, `car`, `okada`) with `VEHICLE_DIMENSIONS` and `VEHICLE_DEFAULT_SPEEDS_MPS` per type, the `Tier` / `TIER_VEHICLE_CAPS` performance tiers (A: 40, B: 20, C: 0 vehicles), `LIVERY_PALETTES` color lists per vehicle type, and the `VehicleState` type (id, type, lat/lng position, heading, speeds, color, optional roadId/laneIndex).
+- **simTraffic.ts** — Exports `createPrng()` (a seeded Mulberry32 PRNG for reproducible traffic), the `TrafficSimConfig` type (seed, tier, center), and the `TrafficSimulator` class, which spawns/removes vehicles within the tier cap (assigning livery colors and default speeds) and advances all vehicles in `step()` using IDM acceleration, picking a leading vehicle within 40 m and a ±45° heading cone.

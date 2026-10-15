@@ -1,0 +1,82 @@
+/* NDU HUD layout: one set of screen slots for every touch overlay on the street map.
+ * Slots (portrait):  top-left column (tools cluster) · top-centre (top pill) · top-right column (rule chip + dock)
+ *                    bottom-left (the ONE joystick, attribution "i" just above it)
+ *                    bottom-right (needs bubble in the corner, ACT + SPRINT above it, the assistant above those)
+ * Landscape / short screens: ACT + SPRINT sit in a row left of the needs bubble so nothing climbs into the dock.
+ * html[data-ndu-touch="1"] is set while the touch controls are mounted. */
+:root {
+  --hud-gap: 12px;
+  --hud-l: max(12px, env(safe-area-inset-left));
+  --hud-r: max(12px, env(safe-area-inset-right));
+  --hud-b: max(12px, env(safe-area-inset-bottom));
+  --hud-stick: 104px;
+  --hud-needs: 64px;
+  --hud-act: 56px;
+  --hud-sprint: 52px;
+  --hud-actions-h: calc(var(--hud-act) + var(--hud-gap) + var(--hud-sprint));
+}
+.ndu-hud-stick {
+  position: absolute;
+  left: var(--hud-l);
+  bottom: var(--hud-b);
+  width: var(--hud-stick);
+  height: var(--hud-stick);
+}
+.ndu-hud-actions {
+  position: absolute;
+  right: var(--hud-r);
+  bottom: calc(var(--hud-b) + var(--hud-needs) + var(--hud-gap));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--hud-gap);
+}
+.ndu-hud-act { width: var(--hud-act); height: var(--hud-act); }
+.ndu-hud-sprint { width: var(--hud-sprint); height: var(--hud-sprint); }
+.ndu-hud-sprint[aria-pressed="true"] { outline: 2px solid #f59e0b; outline-offset: 2px; }
+
+/* Assistant (Ada) climbs above the action cluster instead of sitting on ACT. */
+html[data-ndu-touch="1"] .ndu-ai {
+  bottom: calc(var(--hud-b) + var(--hud-needs) + var(--hud-actions-h) + 2 * var(--hud-gap)) !important;
+}
+
+/* Map credits: compact "i" just above the joystick, small text when opened. */
+html[data-ndu-touch="1"] .maplibregl-ctrl-bottom-right {
+  /* bounded on both sides: opened credits wrap instead of running under ACT/SPRINT */
+  right: calc(var(--hud-r) + var(--hud-act) + var(--hud-gap));
+  left: var(--hud-l);
+  display: flex;
+  justify-content: flex-start;
+  bottom: calc(var(--hud-b) + var(--hud-stick) + 8px);
+}
+html[data-ndu-touch="1"] .maplibregl-ctrl-bottom-right .maplibregl-ctrl { margin: 0; }
+html[data-ndu-touch="1"] .maplibregl-ctrl-attrib {
+  font-size: 10px;
+  line-height: 1.3;
+  max-width: 100%;
+}
+html[data-ndu-touch="1"] .maplibregl-ctrl-attrib.maplibregl-compact {
+  min-height: 24px;
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  :root { --hud-stick: 92px; }
+  .ndu-hud-actions {
+    bottom: var(--hud-b);
+    right: calc(var(--hud-r) + var(--hud-needs) + var(--hud-gap));
+    flex-direction: row-reverse;
+    align-items: flex-end;
+  }
+  html[data-ndu-touch="1"] .ndu-ai {
+    bottom: calc(var(--hud-b) + var(--hud-needs) + var(--hud-gap)) !important;
+  }
+  html[data-ndu-touch="1"] .maplibregl-ctrl-bottom-right {
+    left: calc(var(--hud-l) + var(--hud-stick) + 8px);
+    right: calc(var(--hud-r) + var(--hud-needs) + var(--hud-act) + var(--hud-sprint) + 3 * var(--hud-gap));
+    bottom: var(--hud-b);
+  }
+}
+
+/* Street controls hide while the office overlay is open, so its own stick is the only one. */
+html[data-ndu-office="1"] .ndu-hud-stick,
+html[data-ndu-office="1"] .ndu-hud-actions { display: none; }

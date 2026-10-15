@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/map",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 73,
+      "bodyTextHash": "dca736d3e0c15359bd02e5d8e39870a950aa4117d4e55b713960feee717bec72",
+      "bodyTextPrefix": "Entering CityDesk Township Streaming procedural block & world si",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/map.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 73,
+      "bodyTextHash": "dca736d3e0c15359bd02e5d8e39870a950aa4117d4e55b713960feee717bec72",
+      "bodyTextPrefix": "Entering CityDesk Township Streaming procedural block & world si",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/map-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/map.json"
+}

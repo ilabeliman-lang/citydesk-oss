@@ -1,0 +1,8 @@
+# CityDesk OSS: known false positives for tree scan (oss-checks secret-scan job).
+title = "citydesk"
+
+[[allowlists]]
+description = "localStorage key name for ingest QA flags, not a credential"
+paths = ['''src/lib/ingest/flags\.ts''']
+regexTarget = "match"
+regexes = ['''ndu\.ingest\.flags\.v1''']

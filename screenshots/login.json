@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/login",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 485,
+      "bodyTextHash": "1e45e544e3d2a4a36e7d3a30b3fad31ea50aa502ac39b287d4dbdc9c2a8e5282",
+      "bodyTextPrefix": "Back to Landing Launch 3D Map NDU IDENTITY & SESSIONS CityDesk S",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/login.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 485,
+      "bodyTextHash": "1e45e544e3d2a4a36e7d3a30b3fad31ea50aa502ac39b287d4dbdc9c2a8e5282",
+      "bodyTextPrefix": "Back to Landing Launch 3D Map NDU IDENTITY & SESSIONS CityDesk S",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/login-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/login.json"
+}

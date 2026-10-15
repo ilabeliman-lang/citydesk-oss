@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 2814,
+      "bodyTextHash": "5d94535ece95e729ecfa2b8e1e480ed40dd5e631ec572338c0fbf463310d5381",
+      "bodyTextPrefix": "CD CityDesk PORT HARCOURT TOWNSHIP Township Life Jarvis Council ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 2872,
+      "bodyTextHash": "15f32f99d9950b195a483d2beaa824dda2da3a3537a0ac4eea8142b2a8a79e49",
+      "bodyTextPrefix": "CD CityDesk PORT HARCOURT TOWNSHIP Launch 3D City Autonomous Sim",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

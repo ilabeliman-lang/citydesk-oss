@@ -1,0 +1,11 @@
+# Good first issues (seed list; not yet filed on GitHub)
+- [ ] Quarantine or fix one of the 3 failing orbit tests (`src/world/orbit`) - check: test green or skipped with reason.
+- [ ] Add missing aria-labels to dock buttons in `OverlayDock.tsx` - check: axe reports 0 issues on the dock.
+- [ ] Add a locale string set for one new language under `src/world/i18n` - check: switch shows translated dock.
+- [ ] Document every flag in `.env.example` with one comment line - check: `npm run check:flags` lists no undocumented flag.
+- [ ] Add a unit test for `src/lib/redact.ts` phone-number formats - check: new cases pass.
+- [ ] Add a perf-budget note for bundle size after Leaflet removal (`docs/perf`) - check: numbers recorded.
+- [ ] Add a screenshot gallery in `docs/oss/` from the phone smoke run - check: images contain no personal data.
+- [ ] Add a "report a building data error" link to the place card - check: link opens OSM edit for that id.
+- [ ] Add a dark-mode contrast check for embossed buttons - check: WCAG AA contrast.
+- [ ] Write a devnet-only explainer page in `docs/` for the verification card - check: reviewed by a maintainer.

@@ -1,0 +1,40 @@
+name: E2E phone smoke
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  phone:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      PROPERTY_ENABLED: ""
+      PROPERTY_MINT_ENABLED: ""
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14"
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      # No DATABASE_URL: the app uses its in-memory PGLite fallback. No secrets needed.
+      - name: Start dev server
+        run: |
+          nohup node ./node_modules/vite/bin/vite.js dev --host 127.0.0.1 --port 8099 > vite.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://127.0.0.1:8099/map && break; sleep 3; done
+      - name: Phone smoke (390x844)
+        run: BASE=http://127.0.0.1:8099 node scripts/e2e/phone-smoke.mjs phone-smoke.png
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phone-smoke
+          path: |
+            phone-smoke.png
+            vite.log

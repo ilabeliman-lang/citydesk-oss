@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/account/sessions",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 306,
+      "bodyTextHash": "8ef727daad0e239a7d2ede08f540020b130c00373cbd73d78493bcfb303c0157",
+      "bodyTextPrefix": "Landing 3D Map Multi-Device Session Security Active Sessions & D",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sessions.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "CityDesk",
+      "hasCanvas": false,
+      "bodyTextLen": 14,
+      "bodyTextHash": "ad5e72b4f02c5d5978ab3996a2c861ed54435116f715d3fead032465fd3747b2",
+      "bodyTextPrefix": "Landing 3D Map",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/sessions-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/sessions.json"
+}

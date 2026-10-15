@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "comment": "NDU-UPG #400: scan pipeline presets, picked by the model's largest side after unit fixes. Budgets from NDU_1000_UPGRADES #355.",
+  "presets": {
+    "prop": { "maxSideM": 2.5, "maxTris": 20000, "textureMax": 1024, "textureFormat": "webp", "simplifyError": 0.001 },
+    "room": { "maxSideM": 40, "maxTris": 50000, "textureMax": 1024, "textureFormat": "webp", "simplifyError": 0.002 },
+    "building": { "maxSideM": 500, "maxTris": 150000, "textureMax": 1024, "textureFormat": "webp", "simplifyError": 0.005 },
+    "splat": { "maxSplats": 500000, "note": "splats are stored and pinned; conversion/budget is a later item (#363-365)" }
+  },
+  "limits": { "minSideM": 0.05, "maxSideM": 500, "usdzMaxEntries": 2000, "usdzMaxUncompressed": 536870912, "timeoutMs": 180000, "maxAttempts": 3 }
+}

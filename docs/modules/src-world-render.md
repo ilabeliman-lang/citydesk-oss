@@ -1,0 +1,7 @@
+# src/world/render
+
+This folder owns rendering-support infrastructure for the NDU 3D world: WebGL context-loss detection and recovery, verification of the canonical layer draw order, and a shared material library for the NDU house color palette. It exists to keep the three.js scene stable when the WebGL context is lost (degrading to a 2D tier after repeated failures) and to reuse cached materials so each palette color compiles only one shader on mobile devices.
+
+- `lifecycle.ts` — Exports the `ContextState` type and the `WebGlLifecycleManager` class (tracks context lost/restored events and permanently degrades to a `degraded_2d` state after 2 failures), plus the `RENDER_ORDER_CONTRACT` list of layer contract IDs in strictly ascending visual order and the `verifyLayerOrder()` function that checks a layer list against that order.
+- `materials.ts` — Exports the `PALETTE_COLORS` map of the NDU house palette, the `PaletteColorKey` type, `getPaletteMaterial()` which returns a single cached `THREE.MeshStandardMaterial` per palette color (adding slight emissive warmth for `sodiumOrange` and `nightWindow`), and `clearMaterialCache()` which disposes and clears the cached materials.
+- `render.test.ts` — A `node:test`/`node:assert/strict` test suite covering the `WebGlLifecycleManager` state transitions (healthy → restoring → permanent `degraded_2d` after 2 failures), `verifyLayerOrder()` acceptance of compliant and rejection of inverted layer orders, and `getPaletteMaterial()` returning identical cached instances for identical palette keys.

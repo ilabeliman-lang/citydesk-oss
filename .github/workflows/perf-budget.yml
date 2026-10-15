@@ -1,0 +1,52 @@
+# NDU-UPG 501/506: bundle-size budget gate + size diff vs the PR base (job summary + PR comment).
+name: perf-budget
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  budget:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Build (client + server bundle; no DB migration)
+        run: node scripts/with-app-env.mjs npx vite build
+      - name: Budget report (head)
+        run: node scripts/perf-budget.mjs --json perf-head.json || echo "BUDGET_FAILED=1" >> "$GITHUB_ENV"
+      - name: Build PR base for the size diff
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          git worktree add ../base "${{ github.event.pull_request.base.sha }}"
+          cd ../base && ln -s "$GITHUB_WORKSPACE/node_modules" node_modules
+          node scripts/with-app-env.mjs npx vite build
+          node "$GITHUB_WORKSPACE/scripts/perf-budget.mjs" --dir .vercel/output/static --json "$GITHUB_WORKSPACE/perf-base.json" || true
+      - name: Size diff
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f perf-base.json ]; then
+            node scripts/perf-budget.mjs --json perf-head.json --baseline perf-base.json --md perf-diff.md || true
+            { echo "### Bundle size (gzip) vs base"; cat perf-diff.md; } >> "$GITHUB_STEP_SUMMARY"
+            { echo "<!-- ndu-perf-budget -->"; echo "### Bundle size (gzip) vs base"; cat perf-diff.md; } > perf-comment.md
+            gh pr comment "${{ github.event.pull_request.number }}" --body-file perf-comment.md --edit-last \
+              || gh pr comment "${{ github.event.pull_request.number }}" --body-file perf-comment.md || true
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: perf-budget
+          path: perf-*.json
+      - name: Fail on budget
+        run: test -z "$BUDGET_FAILED"

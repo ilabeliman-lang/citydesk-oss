@@ -1,0 +1,65 @@
+{
+  "name": "City Desk Statehouse",
+  "law": "Inhabitants may live and propose. Sun approves every spend, send, delete, deploy, and source change.",
+  "tick": 33,
+  "at": "2026-10-09T17:00:53+00:00",
+  "interval_seconds": 600,
+  "districts_up": 6,
+  "districts": [
+    {
+      "up": true,
+      "code": 401,
+      "note": "HTTPError",
+      "id": "statehouse",
+      "name": "Agent office"
+    },
+    {
+      "up": true,
+      "code": 200,
+      "id": "street",
+      "name": "City Desk"
+    },
+    {
+      "up": true,
+      "code": 200,
+      "id": "watch",
+      "name": "Red team"
+    },
+    {
+      "up": true,
+      "code": 200,
+      "id": "mail",
+      "name": "Posthouse"
+    },
+    {
+      "up": true,
+      "code": 200,
+      "id": "market",
+      "name": "Tradeforge"
+    },
+    {
+      "up": true,
+      "code": 200,
+      "id": "clerk",
+      "name": "Visualizer"
+    }
+  ],
+  "proposal": {
+    "id": "sh-00033",
+    "at": "2026-10-09T17:00:53+00:00",
+    "speaker": "Ledger",
+    "text": "Ledger: leave vouchers as history. Eat spends 10, the shift adds 30, no cash-out.",
+    "status": "pending_sun",
+    "effect": "record_only"
+  },
+  "projects_in_the_city": [
+    "citydesk",
+    "agent-office",
+    "onelove",
+    "posthouse",
+    "GreenFunds",
+    "tradeforge",
+    "defi-redteam",
+    "jarvis"
+  ]
+}

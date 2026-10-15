@@ -1,0 +1,6 @@
+{
+  "_readme": "PUBLIC devnet values only. Never put a private key or seed phrase here. payee = a devnet wallet address YOU control that receives test-token hire payments. neuraDevnetMint = a devnet stand-in NEURA mint you created with spl-token on devnet (leave empty to offer devnet USDC only). dispatcherUrl = a NeuraNet dispatcher reachable from this studio, e.g. http://127.0.0.1:4300 (empty = clearly-labeled mock data).",
+  "payee": "",
+  "neuraDevnetMint": "",
+  "dispatcherUrl": ""
+}

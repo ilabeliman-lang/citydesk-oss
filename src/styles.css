@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Outfit:wght@400;500;650&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Outfit", system-ui, sans-serif;
+  --color-bg: #1a1511;
+  --color-surface: #2c241c;
+  --color-fg: #f6efe2;
+  --color-muted: #b5a48e;
+  --color-accent: #e8843a;
+  --radius: 1rem;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+.street-sign {
+  background: var(--color-fg);
+  color: var(--color-bg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* NDU cat 12 basics: visible keyboard focus, and the in-app "Reduce motion" switch */
+:focus-visible { outline: 2px solid #f2b45a; outline-offset: 2px; }
+html[data-reduce-motion] *, html[data-reduce-motion] *::before, html[data-reduce-motion] *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+.ndu-a11y-chip { box-shadow: 3px 3px 8px rgb(0 0 0 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.08); }
+.ndu-a11y-chip[aria-pressed="true"] { box-shadow: inset 2px 2px 6px rgb(0 0 0 / 0.35); outline: 1px solid #f2b45a; }
